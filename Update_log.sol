@@ -63,15 +63,15 @@ contract Update_log {
     }
     
     // 最新のファームウェア情報を比較
-    function compInfo(string memory _model, int256 _ver) public view returns (bool, string memory){
+    function compInfo(string memory _model, int256 _ver) public view returns (int256, string memory){
         if(vender[_model] == address(0)){
             revert("該当するモデルはありません");
         }
         int256 ver = version[_model][version[_model].length - 1];
         if(_ver == ver){
-            return (true, "");
+            return (0, "");
         }else{
-            return (false, dl_link[_model][_ver]);
+            return (ver - _ver, dl_link[_model][_ver]);
         }
     }
 }
